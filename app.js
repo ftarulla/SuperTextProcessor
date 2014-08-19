@@ -4,24 +4,9 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var services = require('./services');
 
-// DB: prueba
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'me',
-  password : 'secret'
-});
-//connection.connect();
-//connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-//  if (err) throw err;
-//  console.log('The solution is: ', rows[0].solution);
-//});
-//connection.end();
-
-// Middleware
-var schemasMiddleware = require('./schemasMiddleware');
-// Rutas
+// Routes
 var indexRoute = require('./routes/index');
 var messageRoute = require('./routes/message');
 
@@ -37,24 +22,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(schemasMiddleware.inject(schemas)); // Cosas que se inyectan en el request al procesar rutas.
+app.use(services.middleware);
 
-if (app.get('env') === 'development'){
-    app.use(function(req,res,next){
-        //console.log("Los esquemas!");
-        //console.log(req.schemas);
-        next();
-    })
-}
-
-// Las rutas de la aplicacion.
-// El index
+///////////////////////////////////////////////////////////////////////////////
+// API
 app.get('/', indexRoute.index);
-// Los mensajes.
-app.get('/api/fixedMessage', messageRoute.fixedMessage);
-app.get('/api/messages', messageRoute.list); 
-app.post('/api/message', messageRoute.create);
 
+// API - Message.
+app.get('/api/fixedMessage', messageRoute.fixedMessage);
+app.get('/api/messages', messageRoute.list);
+app.get('/api/messages/:id', messageRoute.get); 
+app.post('/api/messages', messageRoute.create);
+app.put('/api/messages', messageRoute.update);
+app.delete('/api/messages/:id', messageRoute.delete);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
