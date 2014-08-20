@@ -1,6 +1,6 @@
 var mysql = require('mysql')
 , dbConfig = require('./dbconfig')
-, texts = require('./services/texts');
+, messages = require('./services/messages');
 
 module.exports.middleware = function(req, res, next) {
 
@@ -17,7 +17,7 @@ module.exports.middleware = function(req, res, next) {
     req.services = function(){
         if(!svc){
             svc =  {
-                texts: new texts(req.connection())
+                messages: new messages(req.connection())
             };
         }
         return svc;

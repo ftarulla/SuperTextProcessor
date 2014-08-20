@@ -9,19 +9,12 @@ exports.list = function(req, res){
             if(messages) {
                 res.json(messages);
             } else {
-                res.json(500, { "Error message::list: NULL error" });
+                res.json(500, { error: "Error message::list: NULL error" });
             }
         },
         function(err) {
-            res.json(500, { "Error message::list: " + err });
+            res.json(500, { error: "Error message::list: " + err });
         });
-
-    // TODO: mover esto al servicio
-    req.connection().query('SELECT id, text FROM `text`', function(err, rows, fields) {
-        if (err) throw err;
-
-        res.json(rows);
-    });
 }
 
 exports.get = function(req, res){
@@ -37,7 +30,7 @@ exports.get = function(req, res){
             }
         }, 
         function(err){
-            res.json(500, { "Error message::get: " + err });
+            res.json(500, { error: "Error message::get: " + err });
         });
 
     // TODO: mover esto al servicio
@@ -58,7 +51,7 @@ exports.create = function(req, res) {
     }).then(function(message) {
         res.json(message);
     }, function(err) {
-        res.json(500, { "Error message::create: " + err });
+        res.json(500, { error: "Error message::create: " + err });
     });
 };
 
@@ -74,7 +67,7 @@ exports.update = function(req, res) {
     .then(function(message) {
         res.json(message);    
     }, function(err) {
-        res.json(500, { "Error message::update: " + err });
+        res.json(500, { error: "Error message::update: " + err });
     });
 };
 
