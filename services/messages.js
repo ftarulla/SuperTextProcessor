@@ -53,13 +53,13 @@ Service.prototype.create = function(data) {
 
 Service.prototype.update = function(data) {
     var result = new Promise();
-    this.connection.query('UPDATE `text` SET text = ? WHERE id = ?', [data.text],
+    this.connection.query('UPDATE `text` SET text = ? WHERE id = ?', [data.text, data.id],
     function(err, res) {
         if (err) {
             result.reject(err);
             return;
         }
-        result.resolve(res.insertId);
+        result.resolve(data.id);
     });
     return result;
 }
@@ -72,7 +72,7 @@ Service.prototype.delete = function(id) {
             result.reject(err);
             return;
         }
-        result.resolve(res.insertId);
+        result.resolve(id);
     });
     return result;
 }

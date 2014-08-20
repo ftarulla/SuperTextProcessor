@@ -3,16 +3,21 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-
 
     <script src='/vendor/angular/angular.js'> </script>
     <script src='/vendor/angular-resource/angular-resource.js'> </script>
     <script src='/vendor/angular-route/angular-route.js'> </script>
 
+    <script src='/app/app.js'> </script>
+    <script src='/app/controllers/messageControllers.js'> </script>
+    <script src='/app/services/messageServices.js'> </script>
+
+  </head>
+  <body ng-app="app">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <div ng-view></div>
 
   </body>
 </html>

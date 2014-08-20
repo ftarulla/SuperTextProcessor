@@ -32,16 +32,12 @@ exports.get = function(req, res){
         function(err){
             res.json(500, { error: "Error message::get: " + err });
         });
-
-    // TODO: mover esto al servicio
-    req.connection().query('SELECT id, text FROM `text`', function(err, rows, fields) {
-        if (err) throw err;
-
-        res.json(rows);
-    });
 }
 
 exports.create = function(req, res) {
+
+    console.log("message::create");
+    console.log(req);
 
     var text = req.param('text');
 
@@ -76,9 +72,9 @@ exports.delete = function(req, res) {
     var id = req.param('id');
 
     req.services().messages.delete(id)
-    .then(function(message) {
-        if(message) {
-            res.json(message);
+    .then(function(id) {
+        if(id) {
+            res.json(id);
         } else {
             res.json(404, { error: 'El mensaje no existe.' });
         }
