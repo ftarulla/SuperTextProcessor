@@ -9,5 +9,11 @@ angular.module('app').config(function($routeProvider, $locationProvider){
     $routeProvider
         .when('/', { 
         	templateUrl: '/app/partials/messageList.html', 
-        	controller: 'messageListCtrl' });
+        	controller: 'messageListCtrl' })
+        .when('/messages/create', {
+          templateUrl: '/app/partials/messageCreate.html', 
+          controller: 'messageCreateCtrl' })
+        .when('/messages/:id', {
+          templateUrl: '/app/partials/messageDetail.html', 
+          controller: 'messageDetailCtrl' });
 });
