@@ -74,7 +74,7 @@ exports.delete = function(req, res) {
     req.services().messages.delete(id)
     .then(function(id) {
         if(id) {
-            res.json(id);
+            res.json({deletedId: id});
         } else {
             res.json(404, { error: 'El mensaje no existe.' });
         }

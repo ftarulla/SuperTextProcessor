@@ -16,6 +16,25 @@ messageControllers.controller('messageListCtrl', [
       .error(function(err){
         console.log("Error: " + err);
       });
+
+    // deleteMessage()
+    $scope.deleteMessage = function(id) {
+
+      MessageService.delete(id)
+        .success(function(data) {
+          var returnedId = parseInt(data.deletedId);
+          var i=0;
+          while(i<$scope.messages.length && $scope.messages[i].id != returnedId) {
+            i++;
+          }
+          if(i<$scope.messages.length) {
+            $scope.messages.splice(i, 1);
+          }
+        })
+        .error(function(err){
+          console.log("Error eliminando message " + id + "." + err);
+        })
+    }
   }
 ]);
 
@@ -45,7 +64,7 @@ messageControllers.controller('messageCreateCtrl', [
   function($scope, $location, MessageService) {
     console.log("messageControllers::messageCreateCtrl");
 
-    // saveMessage()    
+    // saveMessage()
     $scope.saveMessage = function() {
 
       MessageService.create($scope.newText)

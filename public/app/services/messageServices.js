@@ -13,6 +13,9 @@ angular.module('messageServices', []).factory('MessageService', [
       },
       create: function(text) {
         return $http.post('/api/messages/', {"text": text});
+      },
+      delete: function(id) {
+        return $http.delete('/api/messages/' + id);
       }
     }
   }
