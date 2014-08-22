@@ -10,6 +10,9 @@ angular.module('messageServices', []).factory('MessageService', [
       },
       get: function(id) {
         return $http.get('/api/messages/' + id);
+      },
+      create: function(text) {
+        return $http.post('/api/messages/', {"text": text});
       }
     }
   }

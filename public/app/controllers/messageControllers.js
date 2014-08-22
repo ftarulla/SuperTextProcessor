@@ -36,3 +36,28 @@ messageControllers.controller('messageDetailCtrl', [
       });
   }
 ]);
+
+messageControllers.controller('messageCreateCtrl', [
+  '$scope',
+  '$location',
+  'MessageService',
+
+  function($scope, $location, MessageService) {
+    console.log("messageControllers::messageCreateCtrl");
+
+    // saveMessage()    
+    $scope.saveMessage = function() {
+
+      MessageService.create($scope.newText)
+        .success(function(data) {
+          $scope.message = data;
+          $location.path("/");
+        })
+        .error(function(err){
+          console.log("Error: " + err);
+        });
+
+    };
+
+  }
+]);
