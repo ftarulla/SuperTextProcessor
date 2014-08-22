@@ -16,6 +16,9 @@ angular.module('messageServices', []).factory('MessageService', [
       },
       delete: function(id) {
         return $http.delete('/api/messages/' + id);
+      },
+      update: function(id, text) {
+        return $http.put('/api/messages/' + id, {"text": text});
       }
     }
   }

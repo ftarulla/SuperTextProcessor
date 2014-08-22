@@ -13,6 +13,9 @@ angular.module('app').config(function($routeProvider, $locationProvider){
         .when('/messages/create', {
           templateUrl: '/app/partials/messageCreate.html', 
           controller: 'messageCreateCtrl' })
+        .when('/messages/modify/:id', {
+          templateUrl: '/app/partials/messageCreate.html', 
+          controller: 'messageModifyCtrl' })
         .when('/messages/:id', {
           templateUrl: '/app/partials/messageDetail.html', 
           controller: 'messageDetailCtrl' });

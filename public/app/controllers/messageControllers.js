@@ -17,6 +17,11 @@ messageControllers.controller('messageListCtrl', [
         console.log("Error: " + err);
       });
 
+    // modifyMessage()
+    $scope.modifyMessage = function(id) {
+      $location.path("/messages/modify/" + id);
+    }
+
     // deleteMessage()
     $scope.deleteMessage = function(id) {
 
@@ -70,6 +75,40 @@ messageControllers.controller('messageCreateCtrl', [
       MessageService.create($scope.newText)
         .success(function(data) {
           $scope.message = data;
+          $location.path("/");
+        })
+        .error(function(err){
+          console.log("Error: " + err);
+        });
+
+    };
+
+  }
+]);
+
+messageControllers.controller('messageModifyCtrl', [
+  '$scope',
+  '$location',
+  '$routeParams',
+  'MessageService',
+
+  function($scope, $location, $routeParams, MessageService) {
+    console.log("messageControllers::messageModifyCtrl");
+
+    // init
+    MessageService.get($routeParams.id)
+      .success(function(data) {
+        $scope.newText = data.text;
+      })
+      .error(function(err){
+        console.log("Error: " + err);
+      });
+
+    // saveMessage()
+    $scope.saveMessage = function() {
+
+      MessageService.update($routeParams.id, $scope.newText)
+        .success(function(data) {
           $location.path("/");
         })
         .error(function(err){

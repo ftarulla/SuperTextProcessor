@@ -33,7 +33,7 @@ app.get('/api/fixedMessage', messageRoute.fixedMessage);
 app.get('/api/messages', messageRoute.list);
 app.get('/api/messages/:id', messageRoute.get); 
 app.post('/api/messages', messageRoute.create);
-app.put('/api/messages', messageRoute.update);
+app.put('/api/messages/:id', messageRoute.update);
 app.delete('/api/messages/:id', messageRoute.delete);
 
 /// catch 404 and forward to error handler

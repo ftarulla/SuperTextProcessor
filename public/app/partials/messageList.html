@@ -6,6 +6,7 @@
   <ul>
     <li ng-repeat="message in messages">
       <button ng-click="deleteMessage(message.id)">Eliminar</button>
+      <button ng-click="modifyMessage(message.id)">Modificar</button>
       <a href="/messages/{{message.id}}">{{message.text}}</a>
     </li>
   </ul>
